@@ -1,0 +1,62 @@
+--- check_saved_searches.py	2024-03-27 13:39:03
++++ check_saved_searches_1.py	2024-03-27 13:44:06
+@@ -57,33 +57,33 @@
+                 )
+ 
+ 
+-class CheckForEmailsInSavedSearch(Check):
+-    def __init__(self) -> None:
+-        super().__init__(
+-            config=CheckConfig(
+-                name="check_for_emails_in_saved_search",
+-                description="Check that email alerts (action.email.to) set in `savedsearches.conf` "
+-                "do not have a default value.",
+-                depends_on_config=("savedsearches",),
+-                tags=(
+-                    Tags.SPLUNK_APPINSPECT,
+-                    Tags.SAVED_SEARCHES,
+-                ),
+-            )
+-        )
++# class CheckForEmailsInSavedSearch(Check):
++#     def __init__(self) -> None:
++#         super().__init__(
++#             config=CheckConfig(
++#                 name="check_for_emails_in_saved_search",
++#                 description="Check that email alerts (action.email.to) set in `savedsearches.conf` "
++#                 "do not have a default value.",
++#                 depends_on_config=("savedsearches",),
++#                 tags=(
++#                     Tags.SPLUNK_APPINSPECT,
++#                     Tags.SAVED_SEARCHES,
++#                 ),
++#             )
++#         )
+ 
+-    def check_config(self, app: "App", config: "ConfigurationProxy") -> Generator[CheckMessage, Any, None]:
+-        for section in config["savedsearches"].sections():
+-            search = SavedSearch(section)
+-            for key, value in section.options.items():
+-                if key.lower() == "action.email.to":
+-                    yield FailMessage(
+-                        f"The saved search {search.name} has specified the"
+-                        f" `action.email.to` property with a provided value."
+-                        f"  This should be left empty or removed. ",
+-                        file_name=config["savedsearches"].get_relative_path(),
+-                        line_number=config["savedsearches"][section.name][key].get_line_number(),
+-                    )
++#     def check_config(self, app: "App", config: "ConfigurationProxy") -> Generator[CheckMessage, Any, None]:
++#         for section in config["savedsearches"].sections():
++#             search = SavedSearch(section)
++#             for key, value in section.options.items():
++#                 if key.lower() == "action.email.to":
++#                     yield FailMessage(
++#                         f"The saved search {search.name} has specified the"
++#                         f" `action.email.to` property with a provided value."
++#                         f"  This should be left empty or removed. ",
++#                         file_name=config["savedsearches"].get_relative_path(),
++#                         line_number=config["savedsearches"][section.name][key].get_line_number(),
++#                     )
+ 
+ 
+ class CheckForRealTimeSavedSearches(Check):

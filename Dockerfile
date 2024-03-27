@@ -1,9 +1,6 @@
 FROM python:3.9-slim-bullseye
 
-ARG APPINSPECT_VERSION
-ENV APPINSPECT_VERSION ${APPINSPECT_VERSION}
-
-RUN pip install splunk-appinspect==${APPINSPECT_VERSION}
+RUN pip install splunk-appinspect==3.5.0
 RUN apt-get update && apt-get upgrade -y && apt-get install jq libmagic1 patch -y
 
 ADD patch.savedsearches.v3.5.0 /tmp/

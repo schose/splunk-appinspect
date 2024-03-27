@@ -27,4 +27,5 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: schose/splunk-appinspect
+          APPINSPECT_VERSION: 3.5.0
           tag: latest
